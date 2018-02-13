@@ -48,7 +48,7 @@ public class PageBuilder {
             new BadgeMaker(X2,Y3,Resources.EXT_RADIUS,new Chevron(Resources.CUSTOM_DARK_GREY, 8, 15, 8, 10, 2)),
             new BadgeMaker(X3, Y3, Resources.EXT_RADIUS,new Plain(BaseColor.GRAY)),
        //     new BadgeMaker(X4,Y3,Resources.EXT_RADIUS,new Vertical(BaseColor.DARK_GRAY,8,10,8,1)),
-            new BadgeMaker(X1,Y4,Resources.EXT_RADIUS,new ImageFiller("D:\\Temp\\ligne.jpg",Resources.EXT_RADIUS * 2, Resources.EXT_RADIUS*2)),
+            new BadgeMaker(X1,Y4,Resources.EXT_RADIUS,new ImageFiller(PageBuilder.class.getResource("/ligne.jpg").getFile(),Resources.EXT_RADIUS * 2, Resources.EXT_RADIUS*2)),
             new BadgeMaker(X2,Y4,Resources.EXT_RADIUS,new Horizontal(BaseColor.LIGHT_GRAY,10,10,10,5)),
             new BadgeMaker(X3,Y4,Resources.EXT_RADIUS,new Vertical(BaseColor.LIGHT_GRAY,10,10,10,5)),
        //     new BadgeMaker(X4,Y4,Resources.EXT_RADIUS,new Polka(BaseColor.LIGHT_GRAY,4,1f)),
