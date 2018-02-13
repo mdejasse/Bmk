@@ -8,15 +8,28 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class BadgeMaker {
 
     
 
-    //public final static String BASE_DIR = "resources\\";
 
-    private final static String DATE_STRING = "16.12.2017";
-    private final static String EUCALYPTUS = "/eucalyptus_transp.png";
+    private final static Properties PROPERTIES = loadProperties();
+
+    private static Properties loadProperties() {
+        try {
+            Properties props =  new Properties();
+            props.load(BadgeMaker.class.getResourceAsStream("/bmk.properties"));
+            return props;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private final static String DATE_STRING = PROPERTIES.getProperty("DATE");
+    private final static String BOTTOM_IMAGE = PROPERTIES.getProperty("IMG_RESOURCE");
 
     private final static float ELEMENTS_GAP = 2.0f;
 
@@ -48,7 +61,7 @@ public class BadgeMaker {
         this.filler = filler;
 
         try {
-            this.eucalyptus = Image.getInstance(this.getClass().getResource(EUCALYPTUS));
+            this.eucalyptus = Image.getInstance(this.getClass().getResource(BOTTOM_IMAGE));
         } catch (BadElementException e) {
             e.printStackTrace();
         } catch (IOException e) {
