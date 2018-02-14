@@ -12,4 +12,9 @@ public class Resources {
     public final static BaseColor CUSTOM_DARK_GREY = new BaseColor(100, 100, 100);
     public final static BaseColor CUSTOM_LIGHT_GRAY = new BaseColor(135,135,135);
 
+
+    public static void main(String[] args) {
+        System.out.println(EXT_RADIUS * 2);
+    }
+
 }

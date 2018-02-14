@@ -13,6 +13,7 @@ public class ImageFiller implements BmkFiller {
 
 
     private String path;
+    private byte[] bytes;
     private float width;
     private float height;
 
@@ -22,10 +23,22 @@ public class ImageFiller implements BmkFiller {
         this.height = height;
     }
 
+    public ImageFiller(byte[] bytes,float width,float height) {
+        this.bytes = bytes;
+        this.width = width;
+        this.height = height;
+    }
+
     @Override
     public void setFilling(PdfContentByte cb) {
         try {
-            Image img = Image.getInstance(path);
+            Image img;
+            if (bytes != null) {
+                img = Image.getInstance(bytes);
+            }
+            else {
+                img = Image.getInstance(path);
+            }
             img.scaleAbsolute(width, height);
             img.setAbsolutePosition(0, 0);
             PdfPatternPainter imgPattern = cb.createPattern(width, height, width, height);

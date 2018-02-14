@@ -1,7 +1,10 @@
 package com.dvectors.perso.md.bmk.csv;
 
+import jdk.internal.util.xml.impl.Input;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,17 +16,26 @@ import java.util.Scanner;
         private static final char DEFAULT_QUOTE = '"';
 
         private File csv;
+        private InputStream is;
         private Scanner scanner = null;
 
 
         public CSVParser(File f) {
             this.csv = f;
+        }
 
+        public CSVParser(InputStream is) {
+            this.is = is;
         }
 
         public void init() {
             try {
-                scanner = new Scanner(csv);
+                if (is != null) {
+                    scanner = new Scanner(is);
+                }
+                else {
+                    scanner = new Scanner(csv);
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

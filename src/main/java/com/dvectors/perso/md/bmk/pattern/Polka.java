@@ -8,10 +8,10 @@ public class Polka extends BmkPattern {
 
     private float radius;
 
-    public Polka(BaseColor color, float width, float height, float xstep, float ystep, float radius) {
+   /* public Polka(BaseColor color, float width, float height, float xstep, float ystep, float radius) {
         super(color, width, height, xstep, ystep, 0);
         this.radius = radius;
-    }
+    }*/
 
     public Polka(BaseColor color, float sizeBox, float radius) {
         super(color, sizeBox, sizeBox, sizeBox, sizeBox, 0);

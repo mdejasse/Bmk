@@ -1,6 +1,8 @@
 package com.dvectors.perso.md.bmk;
 
+import com.dvectors.perso.md.bmk.csv.CSVParser;
 import com.dvectors.perso.md.bmk.pattern.*;
+import com.dvectors.perso.md.bmk.util.Coordinate;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
@@ -32,9 +34,11 @@ public class PageBuilder {
     private final static float Y5 = Y4 - (Resources.EXT_RADIUS * 2 + GAP_Y);
     //private final static float Y6 = Y5 - (Resources.EXT_RADIUS * 2 + GAP_Y);
 
+    private final static float[][] XYS = new float[][] {{X1,Y1},{X2,Y1},{X3,Y1},{X1,Y2},{X2,Y2},{X3,Y2},{X1,Y3},{X2,Y3},{X3,Y3},{X1,Y4},{X2,Y4},{X3,Y4},{X1,Y5},{X2,Y5},{X3,Y5}};
+
     
     
-    List<BadgeMaker> makers = Arrays.asList(new BadgeMaker(X1,Y1,Resources.EXT_RADIUS,new Chevron(BaseColor.GRAY, 10, 15, 10, 10, 4)),
+  /*  List<BadgeMaker> makers = Arrays.asList(new BadgeMaker(X1,Y1,Resources.EXT_RADIUS,new Chevron(BaseColor.GRAY, 10, 15, 10, 10, 4)),
             new BadgeMaker(X2,Y1,Resources.EXT_RADIUS,new Chevron(BaseColor.LIGHT_GRAY, 15, 15, 15, 10, 3)),
 
             new BadgeMaker(X3, Y1, Resources.EXT_RADIUS,new Horizontal(BaseColor.GRAY,10,10,10,5)),
@@ -76,7 +80,7 @@ public class PageBuilder {
             new BadgeMaker(X3,Y4,Resources.EXT_RADIUS,new Vertical(BaseColor.LIGHT_GRAY,10,10,10,5)),
             new BadgeMaker(X1,Y5,Resources.EXT_RADIUS,new Polka(BaseColor.LIGHT_GRAY,4,1f)),
             new BadgeMaker(X2,Y5,Resources.EXT_RADIUS,new Vertical(BaseColor.LIGHT_GRAY,8,10,8,1)),
-            new BadgeMaker(X3,Y5,Resources.EXT_RADIUS,new Horizontal(BaseColor.GRAY,10,20,20,8)));//,
+            new BadgeMaker(X3,Y5,Resources.EXT_RADIUS,new Horizontal(BaseColor.GRAY,10,20,20,8)));//,*/
 
 
 
@@ -86,26 +90,36 @@ public class PageBuilder {
 
     public void run(Document document, PdfWriter writer, List<Guest> guests) throws Exception {
         PdfContentByte cb = writer.getDirectContent();
-        Iterator<BadgeMaker> itBm = makers2.iterator();
+
+        List<BmkFiller> patterns =  new CSVPatternReader().read();
+        Iterator<BmkFiller> itFillers = patterns.iterator();
+
+        //Iterator<BadgeMaker> itBm = makers2.iterator();
         int cnt = 0;
         for (Guest guest : guests) {
-            cnt++;
+            if (cnt == XYS.length) {
+                cnt = 0;
+                document.newPage();
+                cb = writer.getDirectContent();
+            }
+            float xy[] = XYS[cnt];
             if (guest.isToPrint()) {
-                if (itBm.hasNext()) {
-                    BadgeMaker badgeMaker = itBm.next();
+                cnt++;
+                if (itFillers.hasNext()) {
+                    BadgeMaker badgeMaker = new BadgeMaker(xy[0],xy[1],Resources.EXT_RADIUS,itFillers.next());
                     badgeMaker.run(cb, guest);
                 } else { //new page
-                    document.newPage();
-                    cb = writer.getDirectContent();
-                    itBm = (cnt%2 == 0)?makers2.iterator():makers.iterator();
-                    if (itBm.hasNext()) {
-                        BadgeMaker badgeMaker = itBm.next();
+                    itFillers = patterns.iterator();
+                    if (itFillers.hasNext()) {
+                        BadgeMaker badgeMaker = new BadgeMaker(xy[0],xy[1],Resources.EXT_RADIUS,itFillers.next());
                         badgeMaker.run(cb, guest);
                     }
                 }
             }
         }
     }
+
+
 
     public static void main(String[] args) {
         Document document = new Document();

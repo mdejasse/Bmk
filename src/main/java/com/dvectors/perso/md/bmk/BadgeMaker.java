@@ -6,6 +6,7 @@ import com.dvectors.perso.md.bmk.pattern.Plain;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -68,11 +69,17 @@ public class BadgeMaker {
             e.printStackTrace();
         }
 
+
         try {
-            ABADI = BaseFont.createFont( this.getClass().getResource("/AbadiMTCondensed.ttf").getFile(),BaseFont.WINANSI,true);
-            PACIFICO = BaseFont.createFont( this.getClass().getResource("/Pacifico-Regular.ttf").getFile(),BaseFont.WINANSI,true);
-            VAST_SHADOW = BaseFont.createFont( this.getClass().getResource("/VastShadow-Regular.ttf").getFile(),BaseFont.WINANSI,true);
-            AMATIC = BaseFont.createFont( this.getClass().getResource("/AmaticSC-Regular.ttf").getFile(),BaseFont.WINANSI,true);
+            // init Fonts
+            byte[] bytesABADI = IOUtils.toByteArray(this.getClass().getResourceAsStream("/AbadiMTCondensed.ttf"));
+            ABADI = BaseFont.createFont("AbadiMTCondensed.ttf",BaseFont.WINANSI,true,true,bytesABADI,null);
+            byte[] bytesPACIFICO = IOUtils.toByteArray(this.getClass().getResourceAsStream("/Pacifico-Regular.ttf"));
+            PACIFICO = BaseFont.createFont( "Pacifico-Regular.ttf",BaseFont.WINANSI,true,true,bytesPACIFICO,null);
+            byte[] bytesVAST_SHADOW = IOUtils.toByteArray(this.getClass().getResourceAsStream("/VastShadow-Regular.ttf"));
+            VAST_SHADOW = BaseFont.createFont( "VastShadow-Regular.ttf",BaseFont.WINANSI,true,true,bytesVAST_SHADOW,null);
+            byte[] bytesAMATIC = IOUtils.toByteArray(this.getClass().getResourceAsStream("/AmaticSC-Regular.ttf"));
+            AMATIC = BaseFont.createFont( "AmaticSC-Regular.ttf",BaseFont.WINANSI,true,true,bytesAMATIC,null);
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {

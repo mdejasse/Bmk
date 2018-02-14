@@ -21,8 +21,8 @@ public class CSVBadger {
         try {
             List<Guest> guests = new ArrayList<Guest>();
 
-            File csv = new File(CSVBadger.class.getResource("/guests.csv").getFile());
-            parser = new CSVParser(csv);
+            //File csv = new File(CSVBadger.class.getResource("/guests.csv").getFile());
+            parser = new CSVParser(CSVBadger.class.getResourceAsStream("/guests.csv"));
             parser.init();
             boolean csvEnd = false;
             while (!csvEnd) {

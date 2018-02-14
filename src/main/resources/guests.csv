@@ -1,9 +1,3 @@
-Hélène;F;;1
-Geoffroy;M;;1
-Mario;M;;1
-Benjamin;M;;1
-Émilie;F;;1
-Bruno;M;;1
 Charline;F;La Mariée;1
 Mathieu;M;Le Marié;1
 Patrick;M;Papa de la mariée;1
@@ -14,10 +8,6 @@ Carla;F;Maman du marié;1
 André;M;Beau-papa du marié;1
 Gwendoline;F;Sœur du marié;1
 Lionel;M;Beau-frère du marié;1
-Thibault;M;;1
-Amélie;F;;1
-Élise;F;Filleule de la mariée;1
-Laly;F;;1
 Maëlle;F;Témoin de la mariée;1
 Romain;M;;1
 Jannick;F;;1
@@ -26,6 +16,10 @@ Laurence;F;Témoin de la mariée;1
 Florent;M;Grand Intendant;1
 Axel;M;Témoin du marié;1
 Anne-Sophie;F;;1
+Thibault;M;;1
+Amélie;F;;1
+Élise;F;Filleule de la mariée;1
+Laly;F;;1
 Adrien;M;;1
 Catherine;F;;1
 Ralph;M;;1
@@ -134,7 +128,14 @@ Gilles;M;;1
 Roman;M;;1
 Delphine;F;;1
 Benoit;M;;1
-Christophe;M;Photographe;1
-Quentin;M;Vidéaste;1
 Annick;F;;1
 Stéphane;M;;1
+Hélène;F;;1
+Geoffroy;M;;1
+Mario;M;;1
+Benjamin;M;;1
+Émilie;F;;1
+Bruno;M;;1
+Christophe;M;Photographe;1
+Quentin;M;Vidéaste;1
+
